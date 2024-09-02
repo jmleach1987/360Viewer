@@ -1907,7 +1907,7 @@ class DomeScript {
 
 
             } else { console.log("Invalid Data"); return;
-                
+
             }
 
              // Debugging information
@@ -1940,8 +1940,4 @@ class DomeScript {
 
         }
     }
-}
-
-
-
 export { DomeScript };
