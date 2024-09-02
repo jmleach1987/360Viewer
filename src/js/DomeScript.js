@@ -190,9 +190,7 @@ class DomeScript {
             renderer = new THREE.WebGLRenderer({ antialias: true });
             renderer.setSize(window.innerWidth, window.innerHeight);
             container.appendChild(renderer.domElement);
-            renderer.sortObjects = false; // controls depth sorting, but I'm still not sure how this works
-            //renderer.outputEncoding = THREE.sRGBEncoding;
-
+            renderer.sortObjects = false;
 
             const measureCollideGeometry = new THREE.PlaneGeometry(5000, 5000, 15, 15);
             const measureCollidematerial = new THREE.MeshBasicMaterial({
@@ -217,7 +215,6 @@ class DomeScript {
                 map: floorIconTex["Arrow"],
                 transparent: true,
                 opacity: 0.6,
-                //visible: true, // hides the object but it is still raycast-able
             });
             const floorArrowMesh = new THREE.Mesh(floorArrowgeometry, material);
             floorArrowMesh.name = "floorArrowMesh";
@@ -250,7 +247,7 @@ class DomeScript {
                 5, // numpoints
                 45 // buffer
             );
-            const floor_meshes = dynfloor.floor_meshes; // dynfloor.clusterpoints(campositions, 90);
+            const floor_meshes = dynfloor.floor_meshes;
             for (let i = 0; i < floor_meshes.length; i++) {
                 multideck.add(floor_meshes[i]);
             }
@@ -294,7 +291,6 @@ class DomeScript {
             // distance to camera every time the camera switches
             if (SceneData.ProdPositions == undefined) return;
             for (let i = 0; i < SceneData.ProdPositions.length; i++) {
-                // SceneData.ProdPositions[i].UPC = parseInt(Math.random() * 10000);
                 let pos = new THREE.Vector3(SceneData.ProdPositions[i].x, SceneData.ProdPositions[i].y, SceneData.ProdPositions[i].z);
                 let PosID = GetProdPosID(pos);
                 if (posID_ProdPos[PosID] == undefined) posID_ProdPos[PosID] = [];
@@ -316,7 +312,6 @@ class DomeScript {
                         return false;
                 }
                 else if (this[i] != array[i]) {
-                    // Warning - two different object instances will never be equal: {x:20} != {x:20}
                     return false;
                 }
             }
@@ -343,25 +338,22 @@ class DomeScript {
                 par.position.set(ProdPoss[i].x, ProdPoss[i].y, ProdPoss[i].z);
                 par.rotation.y = -Math.PI / 2;
 
-                const planegeometry = new THREE.PlaneGeometry(1, 1); // ProdPoss[i].width, ProdPoss[i].height );
+                const planegeometry = new THREE.PlaneGeometry(1, 1);
                 let material = new THREE.MeshBasicMaterial({
                     color: c,
-                    //side: THREE.SingleSide,
                     transparent: true,
                     opacity: 0.01,
-                    //opacity: 0.2,
                     visible: false
                 });
 
                 const planemesh = new THREE.Mesh(planegeometry, material);
-                planemesh.position.set(0.5, 0.5, 0); // (ProdPoss[i].width * 0.393701) / 2.0, (ProdPoss[i].height * 0.393701) / 2.0, 0);
+                planemesh.position.set(0.5, 0.5, 0);
 
                 planemesh.info = ProdPoss[i];
 
                 par.scale.set(ProdPoss[i].width, ProdPoss[i].height, 1);
 
                 const helper = new THREE.BoxHelper(planemesh, c);
-                //helper.renderOrder = -1;
                 helper.material.depthTest = false;
                 helper.material.opacity = 0.2;
                 helper.material.transparent = true;
@@ -370,13 +362,11 @@ class DomeScript {
                 par.add(helper);
                 par.add(planemesh);
                 scene.add(par);
-
                 let infoPoint = new THREE.Object3D();
                 infoPoint.name = "infoPoint";
                 planemesh.infoPoint = infoPoint;
                 infoPoint.position.set(0, 0, 0);
                 planemesh.add(infoPoint);
-
                 ProdPossObjs.push(par);
             }
         }
@@ -696,9 +686,6 @@ class DomeScript {
         function ObjectInfoMoveBarUp(event) { event.preventDefault(); infoboxMoveBarDown = false; infoboxResizeDown = false; }
 
 
-        // RESIZE
-
-
         function ObjectInfoResizeDown(event) {
             event.preventDefault();
             infoboxResizeDown = true;
@@ -714,17 +701,12 @@ class DomeScript {
             chosenCamObj = camObj;
             chosenCamObj.visible = false;
 
-            // PreloadATexture(camObj);
-
             let id = GetVersionGroupID(new THREE.Vector3(chosenCamObj.SceneData.x, chosenCamObj.SceneData.y, chosenCamObj.SceneData.z));
             VersionGroups[id].forEach(function (ch) {
                 PreloadATexture(ch);
             });
 
             RefreshZoom();
-
-            // if (camObj == undefined) { camObj = camangles.children[0]; chosenCamObj = camangles.children[0]; }
-
             Mobile.EnableSelectionTimer = undefined;
             Mobile.noSelect = true;
 
@@ -818,7 +800,6 @@ class DomeScript {
 
                         let ff = String(CurrentDome.material.map.image.src);
                         if (ff.includes("/lowRes/")) {
-                            // let d = new Date();
                             let src = uploadsDir + DMGroup + '/' + DMProject + '/' + chosenCamObj.name + '.jpg?v=' + SceneData.CacheTime; // + d.getTime();
                             console.log("loading Highres: " + src);
                             chosenCamObj.DomeImage = new THREE.TextureLoader().load(src, function (tex) {
@@ -835,7 +816,6 @@ class DomeScript {
 
                     clearInterval(CheckHiRes1);
                 } else {
-                    //console.log("nope");
                 }
             }, 500); // checks every ? milliseconds until loaded
 
@@ -843,7 +823,6 @@ class DomeScript {
         }
 
         function RefreshZoom(event) {
-            //if (BlockDoubleTap()) return;
             if (event != undefined) {
                 event.stopPropagation();
                 event.preventDefault();
@@ -866,7 +845,6 @@ class DomeScript {
 
             if (Selected_INFO_OBJECT != undefined) {
                 Selected_INFO_OBJECT.material.opacity = 0.05;
-                //Selected_INFO_OBJECT.wire.material.color = new THREE.Color("rgb(20, 160, 230)");
                 Selected_INFO_OBJECT.wire.material.opacity = 0.2;
                 Selected_INFO_OBJECT = undefined;
             }
@@ -888,7 +866,6 @@ class DomeScript {
         }
 
         function HideShowImage(event) {
-            //if (BlockDoubleTap()) return;
             if (event != undefined) {
                 event.stopPropagation();
                 event.preventDefault();
@@ -898,43 +875,12 @@ class DomeScript {
 
             if (ImageDome.material.opacity < 1) {
                 ImageDome.material.opacity = 1;
-                //g.className = g.className.replace("_Off", "_On");
             } else {
                 ImageDome.material.opacity = 0.24;
-                //g.className = g.className.replace("_On", "_Off");
             }
         }
 
         function HideShowPOVs(event) {
-
-            //if (BlockDoubleTap()) return;
-            //if (event != undefined)
-            // {
-            //	event.stopPropagation();
-            //	event.preventDefault();
-            // }
-            //if (camangles == undefined) return;
-            //camangles.children.forEach( function(child) {
-            //	child.visible = POVsHidden;
-            // });
-            //camangles.children[chosenPOV].visible = false;
-            //camangles.children.forEach( function(child) {
-            //	child.visible = POVsHidden;
-            //	if (child.name == SceneData.CamPos[chosenPOV].name) child.visible = false;
-            // });
-
-            //infoBoxes.children.forEach( function(child) {
-            //	child.visible = POVsHidden;
-            // });
-
-            //POVsHidden = !POVsHidden;
-
-            //let g = document.getElementById("HideShowPOVButton");
-            //if (POVsHidden) g.className = g.className.replace("_On", "_Off");
-            //else g.className = g.className.replace("_Off", "_On");
-
-            //if (POVsHidden) { document.getElementById("HideShowPOVButton").innerText = "Show POV Locations"; }
-            //else { document.getElementById("HideShowPOVButton").innerText = "Hide POV Locations"; }
         }
 
         function HideShowLevels(event) {
@@ -1008,14 +954,10 @@ class DomeScript {
             }
             disableAutoRotate = !disableAutoRotate;
             let g = document.getElementById("AutoRotateButton");
-            //ButtonBarButtonOnOff(g);
-            //console.log(disableAutoRotate);
             if (!disableAutoRotate) {
-                //	g.className = g.className.replace("_Off", "_On");
                 autoRotateinc = 0;
             }
             else {
-                //	g.className = g.className.replace("_On", "_Off"); 
             }
         }
         function AutoRotateOff(event) {
@@ -1025,8 +967,6 @@ class DomeScript {
             }
             disableAutoRotate = true;
             autoRotateinc = 0;
-            //let g = document.getElementById("AutoRotateButton");
-            //g.className = g.className.replace("_On", "_Off");
         }
 
 
@@ -1046,8 +986,6 @@ class DomeScript {
             multideck.visible = !MeasureEnabled;
 
             measureCollideCurrent = measureCollideHorizontal;
-            //measureCollideHorizontal.visible = true;
-            //measureCollideVertical.visible = false;
             measureCollideHorizontal.position.copy(chosenCamObj.position);
 
             $("#MeasureMenu").stop().fadeToggle("fast", function () { });
@@ -1060,8 +998,6 @@ class DomeScript {
             }
             measureWidth = true;
             measureCollideCurrent = measureCollideHorizontal;
-            //measureCollideHorizontal.visible = true;
-            //measureCollideVertical.visible = false;
             document.getElementById("MesH").className = "MainMenuButton";
             document.getElementById("MesW").className = "MainMenuButton MeasureOn";
         }
@@ -1076,7 +1012,6 @@ class DomeScript {
             measureCollideHorizontal.visible = false;
             document.getElementById("MesW").className = "MainMenuButton";
             document.getElementById("MesH").className = "MainMenuButton MeasureOn";
-            // console.log("CHANGED");
         }
 
         function EmailLink(event) {
@@ -1086,7 +1021,7 @@ class DomeScript {
             }
             let subject = "3D Dome Viewer: " + DMGroup + " - " + DMProject;
             let body = "Here is the " + DMGroup + " - " + DMProject + " 3D Dome Viewer project for your review:\r\n\r\n<";
-            body += CameraURL; //window.location.href;
+            body += CameraURL;
             body += ">";
 
             let uri = "mailto:?subject=";
@@ -1341,7 +1276,6 @@ class DomeScript {
                     return pt;
                 }
             }
-            // cursor = "default";
             return false;
 
         }
@@ -1376,9 +1310,6 @@ class DomeScript {
                             child.material.opacity = 1;
                         }
                     }
-
-
-
                 });
 
                 if (nearest != undefined) {
@@ -1388,10 +1319,6 @@ class DomeScript {
                     floorArrow.nearest = nearest;
                     PreloadATexture(nearest);
                 } else {
-                    // let f = new THREE.Vector3(chosenCamObj.position.x, chosenCamObj.position.y+0.1, chosenCamObj.SceneData.floor + 0.1 );
-                    // console.log("NOPE");
-                    // floorArrow.lookAt(f);
-
                 }
 
             }
@@ -1407,8 +1334,6 @@ class DomeScript {
                     floorArrow.mesh.material.needsUpdate = true;
                 }
             }
-            //floorArrow.mesh.visible = (floorArrow.nearest != undefined);
-
         }
 
 
@@ -1431,7 +1356,6 @@ class DomeScript {
 
 
         function onDocumentMouseDown(event) {
-            //if (BlockDoubleTap()) return;
             event.preventDefault();
 
             fade = true;
@@ -1471,9 +1395,6 @@ class DomeScript {
             cursor = "none";
 
             FloorIcon();
-
-            // $("#NameBar").hide();
-
             if (isUserInteracting === true) {
                 if (fade) {
                     fade = false;
@@ -1481,21 +1402,12 @@ class DomeScript {
                 }
 
                 cursor = "grabbing";
-                /*
-                if (Selected_INFO_OBJECT != undefined) {
-                    Selected_INFO_OBJECT.material.opacity = 0.000001;
-                    Selected_INFO_OBJECT.wire.material.color = new THREE.Color("rgb(20, 160, 230)");
-                    Selected_INFO_OBJECT.wire.material.opacity = 0.2;
-                    Selected_INFO_OBJECT = undefined;
-                }*/
-
                 lon = (onPointerDownPointerX - mousePosX) * 0.1 + onPointerDownLon;
                 lat = (mousePosY - onPointerDownPointerY) * 0.1 + onPointerDownLat;
 
             } else {
 
                 if (!MeasureEnabled) {
-                    // CheckForPOVIntersection(mouse);
                     if (!CheckForProdPosIntersection()) {
                         CheckForInfoBoxIntersection();
                     }
@@ -1530,9 +1442,7 @@ class DomeScript {
             if (INFO_OBJECT != null && INFO_OBJECT != Selected_INFO_OBJECT) {
                 // remove previous hover edits from previous hover object
                 INFO_OBJECT.material.opacity = 0.05;
-                //INFO_OBJECT.material.opacity = 0.2;
                 INFO_OBJECT.children[0].material.opacity = 0.2;
-                //INFO_OBJECT.children[0].material.linewidth = 1;
             }
             INFO_OBJECT = null;
 
@@ -1541,8 +1451,6 @@ class DomeScript {
                 PROD_OBJECT.material.opacity = 0.05;
             }
             PROD_OBJECT = null;
-
-            // $("#NameBar").hide();
         }
 
         function onDocumentMouseUp(event) {
@@ -1561,7 +1469,6 @@ class DomeScript {
                     CreateMeasurePoint();
                 }
                 else {
-                    //if (!CheckForPOVIntersection(mouse)) {
                     if (!CheckForProdPosIntersection()) {
                         if (!CheckForInfoBoxIntersection()) {
                             if (floorArrow.nearest != undefined) {
@@ -1604,9 +1511,6 @@ class DomeScript {
                             WriteAllData(Selected_INFO_OBJECT.info);
                         }
                     }
-
-
-                    // }
                 }
             }
             isUserDragging = false;
@@ -1751,7 +1655,7 @@ class DomeScript {
 
         function WriteAllData(object) {
 
-            let write = "";//"Object Info:</br>";
+            let write = "";
             let keys = Object.keys(object);
             let k = "";
             keys.forEach(function (entry) {
@@ -1760,8 +1664,7 @@ class DomeScript {
 
                     write += "<div class=\"objInfo_Block\"><p><span class=\"objInfo_Label\">" + entry;
 
-                    if (entry.endsWith("_link")) { // links
-                        //write += entry.replace("_link", "") + ": <a class=\"objInfo_Block\" target=\"_blank\"  href=\"" + object[entry] +  "\">Link</a></br>" ;
+                    if (entry.endsWith("_link")) {
                         write += ": <a class=\"objInfo_ValueLink\" target=\"_blank\"  href=\"" + object[entry] + "\">" + object[entry] + "</a>";
                     }
                     else { write += ": </span><span class=\"objInfo_Value\">" + object[entry] + "</span></p>"; }
@@ -1776,10 +1679,8 @@ class DomeScript {
             }
             else {
                 $("#ObjectInfo").stop().fadeTo("fast", 1, function () {
-                    // Animation complete.
                 });
                 $("#ObjectInfoArrow").stop().fadeTo("fast", 1, function () {
-                    // Animation complete.
                 });
             }
         }
@@ -1921,28 +1822,11 @@ class DomeScript {
                 camera.lookAt(camera.target);
             }
 
-
-            // when the sprite connects to the camera it dissapears
-            //let camforward = new THREE.Vector3(0,0,0);
-            //camera.getWorldDirection(camforward);
-            //camforward.multiplyScalar(50010);
-            //camforward.add(camera.position);
-            //loadingSprite.position.copy(camforward);
-
-
-
             if (MeasureClick >= 1) {
                 MoveMeasure();
             }
-
-
             if (MeasureEnabled) cursor = "crosshair";
             InteractionDiv.style.cursor = cursor;
-
-
-            /*
-            // distortion
-            */
 
             if (Mobile.isStereo) {
                 effect.render(scene, camera);
@@ -1980,13 +1864,12 @@ class DomeScript {
 
             // Get the project from the address bar
             let a = location.href;
-            // replace all the %20 with spaces for nice name
+            // replace all the %20 with spaces
             while (a.includes("%20")) {
                 a = a.replace("%20", " ")
             }
             // the project name is after the ?
-            // there is a js file in that folder that
-            // needs to be loaded
+            // there is a js file in that folder that needs to be loaded
             let b = a.split("?");
             let script;
             if (b.length >= 3) {
