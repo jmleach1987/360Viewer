@@ -43,7 +43,7 @@ function CreateImages() {
 	var PageTitle = document.getElementById("PageTitle");
 	PageTitle.innerText = group + " - " + project;
 	
-	for (var i=0; i<pl.ProjectImages.length; i++) {
+	for (var i=0; i<pl.ProjectImages.length; i++)
 		if (pl.ProjectImages[i].group != group || pl.ProjectImages[i].project != project) continue;
 		var img = new Image();
 		img.src = "../../uploads/image_projects/" + pl.ProjectImages[i].imgName;
@@ -52,7 +52,6 @@ function CreateImages() {
 		img.addEventListener('mouseover', ImageOver);
 		img.addEventListener('mouseleave', ImageLeave);
 		img.addEventListener('click', ImageClick);
-	}
 }
 
 function FileName(path) {
