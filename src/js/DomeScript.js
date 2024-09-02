@@ -40,8 +40,7 @@ class DomeScript {
         const clock = new THREE.Clock();
 
         // points to the website so the images can be literally sourced
-        let uploadsDir = './src/uploads/';
-
+        let uploadsDir = '../../uploads';
 
         // this is the old way that was index based
         // let chosenPOV = 0; // index of the current camera
