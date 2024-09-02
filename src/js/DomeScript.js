@@ -1906,7 +1906,13 @@ class DomeScript {
                 }
 
 
-            } else { console.log("Invalid Data"); return; }
+            } else { console.log("Invalid Data"); return;
+                
+            }
+
+             // Debugging information
+             console.log("Incoming location.href:", location.href);
+            };
 
 
             // the images are svg, no loading necessary
