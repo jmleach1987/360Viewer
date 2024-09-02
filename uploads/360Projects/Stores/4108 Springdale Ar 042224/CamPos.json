@@ -1,7 +1,7 @@
 {
 	"CamPos":[
 		{"name":"GR_Entrance","x":-5208.06,"y":64.0,"z":-68.43,"floor":0.0},
-		{"name":"GM_Entrance","x":-2615.18,"y":64.0,"z":-215.18,"floor":0.0},
+		{"name":"GM_Entrance","x":-2615.18,"y":64.0,"z":-215.18,"floor":0.0}
 	],
 	"CacheTime":"63849982066688.0"
 }
