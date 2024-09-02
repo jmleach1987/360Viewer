@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	</script>
+
+	<title>Vizkey - Version Viewer</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<META HTTP-EQUIV="Expires" CONTENT="Tue, 01 Jan 1980 1:00:00 GMT">
+	<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<META HTTP-EQUIV="Pragma" CONTENT="no-store">
+	<meta http-equiv="Cache-Control" content="no-store" />
+
+	<LINK href="src/css/VersionStyle.css" rel="stylesheet" type="text/css">
+	<script src="src/js/jquery-2.1.0.min.js"></script>
+
+	<script>
+		wd = {}
+		wd.project = undefined;
+		window.onerror = function (msg, url, line) {
+			//alert("ERROR: " + msg + "\nurl: " + url + "\nline: " + line);
+			var suppressErrorAlert = false;
+			return suppressErrorAlert;
+		}
+	</script>
+
+	<script src="src/js/VersionScript.js"></script>
+
+</head>
+	<body>
+		
+		<div id="ToggleContainer">
+			<div id="DivImageA" class="DivImage">
+				
+				<!--<img id="imgA" src="" class="images" alt="Select an image"/>-->
+			</div>
+			<div id="DivImageB" class="DivImage">
+				<div id="DivImageB2" class="DivImage">
+					<!--<img id="imgB" src="" class="images" alt="Select an image"/>-->
+				</div>
+				
+			</div>
+			
+			<div id="Splitter"></div>
+			<div id="SplitterHandle" class="Default">
+				<!--<img src="src/img/moveicon.png" width=30 height=auto/>-->
+				Fade</br>
+				Crop
+			</div>
+			<div id="SplitterHandle_Tooltip" class="Default">Drag up or down to change</br>Image B's opacity</br></br>Drag left or right to crop</div>
+			
+			<div id="DivImageA_Text" class="DivImageText Default">Image A</div>
+			<div id="DivImageB_Text" class="DivImageText Default">Image B</div>
+			
+			<select id="NameA" class="Names Default" onchange="NewImageA()">
+				<option value="">Please Select Image A</option> 
+			</select>
+			<select id="NameB" class="Names Default" onchange="NewImageB()">
+				<option value="">Please Select Image B</option> 
+			</select>
+			
+			<img id="PointerArrow" width="auto" height="120" src="src/img/Arrow.png"/>
+		</div>
+		
+		<div id="Help_Step1" class="Help"><p width="100%" align="center" style="background-color:Blue;">Image Comparer</p></br>First choose your images to compare from each of the dropdown lists above.</div>
+		<div id="Help_Step2" class="Help">Now choose your "Image A" from the dropdown list above on the left.</div>
+		<div id="Help_Step3" class="Help">Now choose your "Image B" from the dropdown list above on the right.</div>
+		<div id="Help_Step4" onclick="CloseHelp_Step4()" class="Help"><button id="CloseHelp4" onclick="CloseHelp_Step4()" >X</button>Now use the control slider in the middle.</br></br> - Moving the control left and right will crop Image A.</br></br> - Moving the control up and down will fade Image B.</div>
+		
+		<div id="IsTransparentReminder">Image B is 100% transparent</div>
+		
+		<script>
+			
+		</script>
+		
+	</body>
+</html>

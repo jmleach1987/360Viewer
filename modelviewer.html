@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    </script>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+    <LINK href="src/css/domeStyle.css?v1.2" rel="stylesheet" type="text/css">
+    <script src="src/js/jquery-2.1.0.min.js"></script>
+
+</head>
+
+<body>
+
+
+
+    <div id="container" style="position:fixed;"></div>
+
+
+    <div id="MainMenu" style="top:90px">
+
+        <input type="text" id="searchtextbox" name="lname" style="position:fixed; top:40px; margin:10px; padding:5px" />
+
+        <div id="ButtonList"></div>
+
+    </div>
+
+    <div id="ButtonBar">
+
+        <button id="MenuButton" class="ButtonBarButton" type="button" style="float:left"></button>
+
+        <!-- ☐☑☒ -->
+
+        <h1 id="TitleBarText" style="position:relative; display:inline-block; background-color: black; margin: auto; padding:8px; min-height:24px; min-width:200px">none</h1>
+        <br>
+
+
+    </div>
+
+
+    <!-- Import maps polyfill -->
+    <!-- Remove this when import maps will be widely supported -->
+    <script async src="https://unpkg.com/es-module-shims@1.3.6/dist/es-module-shims.js"></script>
+
+
+    <!--<script type="importmap">
+        {
+            "imports": {
+                "three": "../build/three.module.js"
+            }
+        }
+    </script>-->
+
+
+    <script type="module">
+        import * as THREE from './src/js/build/three.module.js?v1.1';
+
+        import { OrbitControls } from './src/js/controls/OrbitControls.js';
+
+        import { FBXLoader } from './src/js/loaders/FBXLoader.js';
+
+        import { GLTFLoader } from './src/js/loaders/GLTFLoader.js';
+        import { RGBELoader } from './src/js/loaders/RGBELoader.js';
+
+        let camera, scene, renderer, stats;
+
+        const clock = new THREE.Clock();
+
+        // let mixer; // for fbx animation
+
+        const uploadsDir = 'https://space.wal-mart.com/3d/assets/uploads/';
+
+        let models;
+        window.onload = function () {
+
+            readTextFile(uploadsDir + 'fbx/' + "models.json", function (text) {
+                models = JSON.parse(text);
+                init();
+
+                makeModelList();
+
+                animate();
+
+                onWindowResize();
+            });
+
+        }
+
+        // common error for messages
+        window.onerror = function (msg, url, line) {
+            console.log("ERROR: " + msg + "\nurl: " + url + "\nline: " + line);
+            let suppressErrorAlert = false;
+            return suppressErrorAlert;
+        }
+
+        function readTextFile(file, callback) {
+            var rawFile = new XMLHttpRequest();
+            rawFile.overrideMimeType("application/json");
+            rawFile.open("GET", file, true);
+            rawFile.onreadystatechange = function () {
+                if (rawFile.readyState === 4 && rawFile.status == "200") {
+                    callback(rawFile.responseText);
+                }
+            }
+            rawFile.send(null);
+        }
+
+
+        function makeModelList() {
+
+            const mm = document.getElementById("MainMenu");
+            mm.style.width = "25%";
+
+            UpdateModelList();
+
+            OpenMainMenu(null);
+
+            document.getElementById("MenuButton").addEventListener('click', OpenMainMenu, false);
+            document.getElementById("searchtextbox").addEventListener('keyup', SearchChanged, false);
+
+        }
+
+
+        let searchtext = "";
+        function SearchChanged(e) {
+
+            searchtext = document.getElementById("searchtextbox").value;
+            UpdateModelList();
+
+        }
+
+
+        let selbutton;
+        function UpdateModelList() {
+
+            const mm = document.getElementById("ButtonList");
+
+            // remove all children
+            while (mm.firstChild) {
+                mm.removeChild(mm.lastChild);
+            }
+
+
+            for (let i = 0; i < models.length; i++) {
+
+                if (searchtext != "") {
+
+                    let compare = models[i].toLowerCase().replace(searchtext.toLowerCase(), "*");
+                    if (compare == models[i].toLowerCase()) continue;
+
+                }
+
+                const b = document.createElement('button');
+                b.className = "MainMenuButton";
+                //if (!mm.firstChild) b.style.marginTop = "100px";
+                mm.appendChild(b);
+                b.addEventListener('click', function () {
+                    ModelClickedFBX(models[i]);
+                    //ModelClickedGLTF(models[i]);
+                    b.classList.add('MainMenuButtonActive');
+                    if (selbutton != undefined) selbutton.classList.remove('MainMenuButtonActive');
+                    selbutton = b;
+                }, false);
+
+                const d = document.createElement('div');
+                d.className = "MainMenuLabel";
+                d.innerText = models[i];
+                b.appendChild(d);
+            }
+
+
+        }
+
+
+        function OpenMainMenu(event) {
+            if (event != undefined) {
+                event.stopPropagation();
+                event.preventDefault();
+            }
+
+            $("#MainMenu").children().hide();
+            $("#MainMenu").css("overflowY", "hidden")
+                .stop()
+                .slideToggle("fast", function () {
+                    $("#MainMenu").children().fadeIn();
+                    $("#MainMenu").css("overflowY", "auto");
+                });
+        }
+
+
+        function ModelClickedFBX(model) {
+
+            if (ModelMesh != undefined) { scene.remove(ModelMesh); }
+
+            TitleBarText.innerText = model;
+
+            // model
+            const loader = new FBXLoader();
+
+            //loader.load(uploadsDir + 'Apparel/4way54wgride/4way54wgride_1.fbx', function (object) {
+            // https://space.wal-mart.com/3d/assets/uploads/fbx/Apparel/2X2suntwr/2X2Suntwr_D.png
+            loader.load(uploadsDir + 'fbx/' + model + '.fbx', function (object) {
+
+                //mixer = new THREE.AnimationMixer( object );
+
+                //const action = mixer.clipAction( object.animations[ 0 ] );
+                //action.play();
+
+                object.traverse(function (child) {
+
+                    if (child.isMesh) {
+
+                        child.castShadow = true;
+                        child.receiveShadow = true;
+
+                    }
+
+                });
+
+                scene.add(object);
+                ModelMesh = object;
+                object.position.set(0, 0, 0);
+
+            }, undefined, function (e) {
+
+                console.error(e);
+
+            });
+
+        }
+
+        //const MANAGER = new LoadingManager();
+        //const THREE_PATH = 'https://unpkg.com/three@0.${REVISION}.x'
+        //const DRACO_LOADER = new DRACOLoader(MANAGER).setDecoderPath('./src/js/libs/draco/gltf/');
+        //const KTX2_LOADER = new KTX2Loader(MANAGER).setTranscoderPath('./src/js/libs/basis/');
+
+        
+
+
+        let ModelMesh;
+        function ModelClickedGLTF(model) {
+
+            if (ModelMesh != undefined) { scene.remove(ModelMesh); }
+
+            TitleBarText.innerText = model;
+
+            //ModelMesh = new RGBELoader()
+            //    .setPath(uploadsDir + 'fbx/' )
+            //    .load('StoreDome.hdr', function (texture) {
+
+            //        texture.mapping = THREE.EquirectangularReflectionMapping;
+
+            //        scene.background = texture;
+            //        scene.environment = texture;
+
+            //        render();
+
+            // model
+
+            // https://space.wal-mart.com/3d/assets/uploads/gltf/Apparel/2X2suntwr/2X2suntwr_1.gltf
+
+            
+            //new GLTFLoader(manager)
+            //    .setPath(uploadsDir + 'gltf/')
+            //    .load(model + '.gltf', function (gltf) {
+
+            //        const scene = gltf.scene || gltf.scenes[0];
+            //        scene.position.set(0, 0, 0);
+            //        ModelMesh = scene;
+            //        scene.add(scene);
+
+            //    });
+
+            
+
+            new GLTFLoader().load(uploadsDir + 'gltf/' + model + '.gltf', (gltf) => {
+
+                scene.add(gltf.scene);
+
+                objectURLs.forEach((url) => URL.revokeObjectURL(url));
+
+            });
+
+
+            //});
+
+
+
+            //const loader = new GLTFLoader(MANAGER)
+            //    .setCrossOrigin('anonymous')
+            //    .setDRACOLoader(DRACO_LOADER)
+            //    .setKTX2Loader(KTX2_LOADER.detectSupport(this.renderer))
+            //    .setMeshoptDecoder(MeshoptDecoder);
+
+            //const blobURLs = [];
+
+            //loader.load(url, (gltf) => {
+
+            //    const scene = gltf.scene || gltf.scenes[0];
+            //    const clips = gltf.animations || [];
+
+            //    if (!scene) {
+            //        // Valid, but not supported by this viewer.
+            //        throw new Error(
+            //            'This model contains no scene, and cannot be viewed here. However,'
+            //            + ' it may contain individual 3D resources.'
+            //        );
+            //    }
+            //}, undefined, reject);
+
+        }
+
+
+
+
+
+        function init() {
+
+            const container = document.createElement('div');
+            document.getElementById("container").appendChild(container);
+
+            camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 6000);
+            camera.position.set(100, 200, 300);
+
+            scene = new THREE.Scene();
+            scene.background = new THREE.Color(0xa0a0a0);
+            scene.fog = new THREE.Fog(0xa0a0a0, 500, 3000);
+
+            const hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
+            hemiLight.position.set(0, 2000, 0);
+            scene.add(hemiLight);
+
+            const dirLight = new THREE.DirectionalLight(0xffffff);
+            dirLight.position.set(0, 800, 300);
+            dirLight.castShadow = true;
+            dirLight.shadow.camera.top = 800;
+            dirLight.shadow.camera.bottom = -800;
+            dirLight.shadow.camera.left = - 820;
+            dirLight.shadow.camera.right = 820;
+            dirLight.shadow.camera.far = 1500;
+
+            dirLight.shadow.mapSize.width = 1024;
+            dirLight.shadow.mapSize.height = 1024;
+            scene.add(dirLight);
+
+            const axesHelper = new THREE.AxesHelper(500);
+            scene.add(axesHelper);
+
+            // scene.add(new THREE.CameraHelper(dirLight.shadow.camera));
+
+            //let spotLight = new THREE.SpotLight(0xFCE5CD);
+            //spotLight.intensity = 8650000;
+            //spotLight.position.set(10, 1910, 80);
+            //spotLight.lookAt(0, 100, 0);
+            //spotLight.castShadow = true;
+            //spotLight.shadow.mapSize.width = 1024 * 4;
+            //spotLight.shadow.mapSize.height = 1024 * 4;
+            //spotLight.penumbra = 0.7;
+            //spotLight.decay = 2;
+            //spotLight.bias = 0.0001;
+            //scene.add(spotLight);
+
+
+
+            // ground
+            const mesh = new THREE.Mesh(new THREE.PlaneGeometry(6000, 6000), new THREE.MeshPhongMaterial({ color: 0x999999, depthWrite: false }));
+            mesh.rotation.x = - Math.PI / 2;
+            mesh.receiveShadow = true;
+            scene.add(mesh);
+
+            const grid = new THREE.GridHelper(2000, 15, 0x000000, 0x000000); // 1 meter is 3.28 ft, 100 is 1 meter
+            grid.material.opacity = 0.06;
+            grid.material.transparent = true;
+            scene.add(grid);
+
+
+
+            //renderer = new THREE.WebGLRenderer({alpha:true});
+            //renderer.setClearColor(0x00ff00, 0.0);
+            renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setPixelRatio(window.devicePixelRatio * 1.5);
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.domElement.style.position = 'absolute';
+            renderer.domElement.style.top = '0px';
+
+            renderer.shadowMap.enabled = true;
+            renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+            renderer.outputEncoding = THREE.sRGBEncoding;
+            renderer.gammaFactor = 2.2;
+
+            //renderer.toneMapping = THREE.ReinhardToneMapping;
+            //renderer.toneMappingExposure = 2.3;
+            renderer.toneMapping = THREE.ACESFilmicToneMapping;
+            renderer.toneMappingExposure = 2.2;
+            renderer.physicallyCorrectLights = true;
+
+            container.appendChild(renderer.domElement);
+
+            const controls = new OrbitControls(camera, renderer.domElement);
+            controls.target.set(0, 100, 0);
+            controls.update();
+
+            window.addEventListener('resize', onWindowResize, false);
+
+        }
+
+        function onWindowResize() {
+
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+
+            renderer.setSize(window.innerWidth, window.innerHeight);
+
+            document.getElementById("searchtextbox").style.width = document.getElementById("MainMenu").offsetWidth - 30 + "px";
+        }
+
+        //
+
+        function animate() {
+
+            requestAnimationFrame(animate);
+
+            const delta = clock.getDelta();
+
+            // if (mixer) mixer.update(delta);
+
+            renderer.render(scene, camera);
+
+        }
+
+    </script>
+
+</body>
+</html>

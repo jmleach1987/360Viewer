@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Page title and meta information -->
+    <title>VizKey Designs 360 Viewer</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <META HTTP-EQUIV="Expires" CONTENT="Tue, 01 Jan 1980 1:00:00 GMT">
+    <META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache" />
+    <META HTTP-EQUIV="Pragma" CONTENT="no-store">
+    <meta http-equiv="Cache-Control" content="no-store" />
+    <meta name="robots" content="noarchive">
+
+    <!-- Link to external CSS stylesheet -->
+    <LINK href="src/css/domeStyle.css?v1.2" rel="stylesheet" type="text/css">
+
+    <!-- jQuery library -->
+    <script src="src/js/jquery-2.1.0.min.js"></script>
+
+    <!-- JavaScript module import and initialization -->
+    <script type="module">
+        import { DomeScript } from './src/js/DomeScript.js?v1.4';
+
+        window.onload = function () {
+            let ds = new DomeScript();  // Create an instance of DomeScript
+            ds.START();  // Call the START method on the instance
+        };
+    </script>
+</head>
+
+<body>
+    <!-- Main container for the viewer -->
+    <div id="container"></div>
+
+    <!-- Information display elements -->
+    <div id="NameBar"></div>
+    <div id="MeasureText"></div>
+
+    <!-- Arrow for object information pointer -->
+    <svg id="ObjectInfoArrow" width="100%" height="100%">
+        <defs>
+            <marker id="arrow" markerWidth="10" markerHeight="10" refX="0" refY="3" orient="auto" markerUnits="strokeWidth" viewBox="0 0 20 20">
+                <path class="arrowcolor" d="M0,0 L0,6 L9,3 z" />
+            </marker>
+        </defs>
+        <line id="ArrowLine" class="arrowcolor" x1="295" y1="50" x2="95" y2="75" stroke-width="1" marker-end="url(#arrow)" />
+    </svg>
+
+    <!-- Loading indicator -->
+    <div id="BGLoadingGrp" style="opacity:0.3; position:absolute; right:10px; bottom:10px; display:none;">
+        <p style="position:relative; left:-3px; bottom:10px;color:white;">Loading Hi-res Images</p>
+        <div id="BGLoading" style="position:absolute; right:0px; bottom:0px; border-radius:4px; width:150px; height:10px; background-color:black; border-style:solid; border-width:1px 1px 0px 0px">
+            <div id="BGLoadingBar" style="position:absolute; border-radius:4px; width:0; height:50%; left:2px; bottom:2px; top:0px; margin:auto; background-color:rgb(170,200,250); border-style:solid; border-width:1px 1px 0px 0px; border-color:white"></div>
+        </div>
+    </div>
+
+    <!-- Interaction and menu elements -->
+    <div id="InteractionDiv" class="center"></div>
+
+    <!-- Main menu with various buttons -->
+    <div id="MainMenu">
+        <div style="height:110px"></div>
+        <button id="Button_FloorList" class="MainMenuButton" type="button">
+            <div id="FloorListIcon" class="MainMenuIcon"></div>
+            <div class="MainMenuLabel">Floor List</div>
+        </button>
+        <button id="Button_CameraList" class="MainMenuButton" type="button">
+            <div id="CameraListIcon" class="MainMenuIcon"></div>
+            <div class="MainMenuLabel">Camera List</div>
+        </button>
+        <!-- Button to toggle auto-rotate -->
+        <button id="Button_AutoRotateToggle" class="MainMenuButton" type="button">
+            <div id="AutoRotateIcon" class="MainMenuIcon"></div>
+            <div class="MainMenuLabel">Auto Rotate</div>
+        </button>
+        <!-- Button to reset zoom -->
+        <button id="Button_RefreshZoom" class="MainMenuButton" type="button">
+            <div id="ZoomIcon" class="MainMenuIcon"></div>
+            <div class="MainMenuLabel">Reset Zoom x</div>
+            <div id="ZoomText" class="MainMenuLabel">0</div>
+        </button>
+        <!-- Button to email link -->
+        <button id="Button_EmailLink" class="MainMenuButton" type="button">
+            <div id="MailLinkIcon" class="MainMenuIcon"></div>
+            <div class="MainMenuLabel">Email Link</div>
+        </button>
+        <!-- Button to hide/show image -->
+        <button id="Button_HideShowImage" class="MainMenuButton" type="button">
+            <div id="HideShowImageIcon" class="MainMenuIcon"></div>
+            <div class="MainMenuLabel">Hide/Show Image</div>
+        </button>
+        <!-- Button to hide/show clickable points -->
+        <button id="Button_HideShowPOVs" class="MainMenuButton" type="button">
+            <div id="HideShowPOVIcon" class="MainMenuIcon"></div>
+            <div class="MainMenuLabel">Hide/Show Clickable</div>
+        </button>
+        <!-- Button to toggle measure tool -->
+        <button id="Button_ToggleMeasureTool" class="MainMenuButton" type="button">
+            <div id="MeasureIcon" class="MainMenuIcon"></div>
+            <div class="MainMenuLabel">Measure</div>
+        </button>
+        <!-- Button to add notation -->
+        <button id="Button_AddNotation" class="MainMenuButton" type="button">
+            <div id="AddNotationIcon" class="MainMenuIcon"></div>
+            <div class="MainMenuLabel">Add Notation</div>
+        </button>
+        <!-- Button to open report/contact form -->
+        <button id="Button_OpenReportContact" class="MainMenuButton" type="button">
+            <div id="ReportBugIcon" class="MainMenuIcon"></div>
+            <p class="MainMenuLabel">Incorrect Visual Element<br>Make a Request<br>Report a bug</p>
+        </button>
+        <div id="TopMessage">F11 for fullscreen on/off<br>ctrl+F5 to refresh cache</div>
+    </div>
+
+    <!-- Camera versions section -->
+    <div id="CameraVersions" class="center">
+        <button class="ButtonBarButton" type="button">One Two Three</button>
+    </div>
+
+    <!-- Button bar with navigation and control buttons -->
+    <div id="ButtonBar">
+        <button id="HomeButton" class="ButtonBarButton" type="button"
+                onclick="location.href='https://vizkeydesigns.com';" value="Go to Home"></button>
+        <button id="MenuButton" class="ButtonBarButton" type="button"></button>
+        <button id="StereoButton" class="ButtonBarButton" type="button"></button>
+        <button id="AccelButton" class="ButtonBarButton" type="button"></button>
+        <h1 id="TitleBarText"></h1>
+    </div>
+
+    <!-- Measure menu for measuring width and height -->
+    <div id="MeasureMenu">
+        <button id="MesW" class="MainMenuButton MeasureOn" type="button">
+            <div class="MainMenuLabel">Measure Width</div>
+        </button>
+        <button id="MesH" class="MainMenuButton" type="button">
+            <div class="MainMenuLabel">Measure Height</div>
+        </button>
+        <button id="CloseMeasureTool" class="MainMenuButton" type="button">
+            <div class="MainMenuLabel">X close</div>
+        </button>
+    </div>
+
+    <!-- Placeholder divs for camera and floor lists -->
+    <div id="CameraList"></div>
+    <div id="FloorList"></div>
+
+    <!-- Object info display -->
+    <div id="ObjectInfo">
+        <div id="ObjectInfoMoveBar"></div>
+        <button id="ObjectInfo_CloseButton" type="button">☓</button>
+        <div id="ObjectInfo2">
+            <div id="ObjectInfoText">Object Info:</div>
+        </div>
+        <div id="ObjectInfoBottomResize"></div>
+    </div>
+
+    <!-- Contact/report form -->
+    <div id="ContactReport" class="center">
+        <div id="ContactReport_window" class="center">
+            <form id="ContactReportForm" action="">
+                <input type="radio" name="subject" value="Incorrect Visual Element"> Incorrect Visual Element<br>
+                <input type="radio" name="subject" value="Request a Feature"> Request a Feature<br>
+                <input type="radio" name="subject" value="Report a bug"> Report a bug
+            </form>
+            <button id="ContactReportButton_CANCEL" class="ContactReportButton" type="button">Cancel</button>
+            <button id="ContactReportButton_OK" class="ContactReportButton" type="button" disabled>Continue</button>
+            <button id="ContactReportButton_CLOSE" type="button">☓</button>
+        </div>
+    </div>
+
+    <!-- Loading screen -->
+    <div id="Loading" class="center">
+        <img src="src/img/ring-alt.svg" class="center"><br>
+        <p id="LoadingWord" class="center">Loading...</p>
+    </div>
+
+    <!-- Center point and additional canvas elements for visual markers -->
+    <div id="CenterDiv">
+        <div id="CenterPoint" class="center centerpoint"></div>
+        <div id="DoublePointLeft" class="center centerpoint"></div>
+        <div id="DoublePointRight" class="center centerpoint"></div>
+        <canvas id="CenterPointCirlce" class="center" width=100 height=100></canvas>
+        <canvas id="DoublePointCirlceLeft" class="center" width=100 height=100></canvas>
+        <canvas id="DoublePointCirlceRight" class="center" width=100 height=100></canvas>
+    </div>
+</body>
+
+</html>

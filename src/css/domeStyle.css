@@ -1,0 +1,584 @@
+:root {
+  --menu-icon-size: 30px;
+}
+
+* {
+	position: relative;
+	padding: 0px;
+	margin: 0px;
+	font-family: Bogle,BogleWeb,Regular;/*Myriad Pro;*/
+	text-decoration: none;
+}
+
+* {
+   -moz-user-select: none;
+   -khtml-user-select: none;
+   -webkit-user-select: none;
+
+   /*
+     Introduced in IE 10.
+     See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+   */
+   -ms-user-select: none;
+   user-select: none;
+}
+
+body, html {
+	background-color: #000000;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+canvas {
+	display: block;
+}
+
+
+button {
+	text-decoration: none;
+	/*box-shadow: 0px 2px 5px rgba( 0,0,0,0.4);*/
+	border: 0px;
+	outline: none;
+/*	opacity: 0.8;*/
+}
+button:hover {
+	cursor: pointer;
+/*	opacity: 1;*/
+}
+input:hover {
+	cursor: pointer;
+}
+
+.center {
+	position: fixed;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	margin: auto;
+	text-align: center;
+	vertical-align: middle;
+}
+
+
+/* -------------- Top Buttons --------------- */
+
+/*
+.imageButton{
+	height: calc(72px*0.45);
+	width: calc(86px*0.45);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-color: black;
+}*/
+
+#HomeButton {
+	display: none;
+	background-image:url('../img/icons_v2/home.svg');
+}
+#MenuButton {
+	background-image:url('../img/icons_v2/menu.svg');
+}
+#StereoButton {
+	background-image:url('../img/icons_v2/goggles.svg');
+}
+#AccelButton {
+	background-image:url('../img/icons_v2/tilt.svg');
+}
+
+
+/* ----------------------------- */
+
+
+
+
+
+
+
+#CenterDiv {
+	display: none;
+}
+
+#CenterPointCirlce {
+	display: none;
+}
+#DoublePointCirlceLeft {
+	display: none;
+	right: 50%;
+}
+#DoublePointCirlceRight {
+	display: none;
+	left: 50%;
+}
+
+#CenterPoint{
+	
+}
+#DoublePointLeft{
+	display: none;
+	right: 50%;
+}
+#DoublePointRight{
+	display: none;
+	left: 50%;
+}
+.centerpoint {
+	width: 9px;
+	height: 9px;
+	background-color: rgba(0,0,0,0.2);
+	border-radius: 6px;
+}
+
+#cross {
+	display: none;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
+
+#teamlogo{
+	position:absolute;
+	bottom: 10px;
+	right: 10px;
+}
+
+#InteractionDiv {
+	/* cursor: grab; */
+}
+
+/* ----------------------------- */
+
+
+
+#Loading {
+	position:absolute;
+	left:0px;
+	top:0px;
+	background-color:rgb(0,0,0);
+	cursor: progress;
+}
+#LoadingBG {
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:100%;
+	height:100%;
+}
+#LoadingWord {
+	padding-top: 130px;
+	height:1px;
+	color:white;
+	font-size:4em;
+	font-weight:bold;
+}
+
+
+/* ----------------------------- */
+
+
+.arrowcolor {
+	stroke: hsl(0, 0%, 50%);
+	fill: hsl(0, 0%, 90%);
+}
+#ObjectInfo {
+	/*box-shadow: -10px 20px 15px rgba(0,0,0,0.2);*/
+	cursor: default;
+	position: absolute;
+	top: 80px;
+	right: 20px;
+	overflow-y: auto;
+	font-size: 1em;
+	width: 400px;
+	height: 800px;
+	background-color: rgba(0,0,0,0.8);/* background-color: hsla(215, 94%, 26%, 1); */ /*#041e42;*/
+	border: solid 1px hsl(0, 0%, 50%);
+	box-shadow: 5px 10px 18px rgba(0,0,0,0.5);
+}
+#ObjectInfo2 {
+	position: relative;
+	top: 28px;
+	max-height: 450px;
+}
+#ObjectInfoText {
+	color: hsla(0, 0%, 0%, 0.9);
+	padding: 1em;
+	margin: 5px;
+	font-family: Monospace;
+	font-size: 1.3em;
+	/*font-weight: bold;*/
+	text-align: left;
+	cursor: default;
+	white-space: wrap;
+}
+#ObjectInfo_CloseButton {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	padding: 0px 4px;
+	color: white;
+	background-color: black;
+}
+#ObjectInfo_CloseButton:hover {
+	background-color: red;
+}
+#ObjectInfoMoveBar {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	height: 21px;
+	background-color: hsl(0, 0%, 50%);
+	cursor: default;
+}
+#ObjectInfoMoveBar:hover {
+	background-color: hsl(0, 0%, 60%);
+	cursor: move;
+}
+#ObjectInfoBottomResize {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	width: 20px;
+	height: 20px;
+	background-color: hsl(0, 0%, 50%);
+}
+#ObjectInfoBottomResize:hover {
+	cursor: nw-resize;
+	background-color: hsl(0, 0%, 60%);
+}
+
+.objInfo_Label {
+	font-weight: 800;
+	color: white;
+	padding: 5px;
+}
+.objInfo_Value, .objInfo_ValueLink {
+	font-weight: 400;
+	font-size: .8em;
+	color: white;
+	padding: 5px;
+}
+.objInfo_ValueLink:hover {
+	color: blue;
+}
+#ObjectInfoArrow {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+
+
+#CameraVersions {
+	vertical-align: top;
+	bottom: auto;
+}
+
+/* ----------------------------- */
+
+
+
+#ButtonBar {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	/*right:0px;*/
+	text-align: left;
+	display: inline;
+	font-size: 0px;
+	/*background-image:url('../img/TitleBar.png');
+	background-size: cover;*/
+}
+.ButtonBarButton {
+	position: relative;
+	top: 0px;
+	left: 0px;
+	background-color: hsl(215, 94%, 26%); /*#041e42;*/
+	min-width: 40px;
+	height: 40px;
+	margin: 1px;
+	vertical-align: bottom;
+	color: white;
+	opacity: 1;
+	background-size: 60%;
+	background-repeat: no-repeat;
+	background-position: center;
+	border: solid 1px hsl(0,0%,80%);
+	padding: 0px 8px 0px 8px;
+}
+
+
+/* ----------------------------- */
+
+
+
+#FloorList, #CameraList {
+	position: absolute;
+	display: none;
+	top: 0px;
+	right: 0px;
+	/*bottom: 0px;*/
+	margin: 0px;
+	/*overflow: hidden;*/
+	background-color: rgba(0,0,0,0.6); /* background-color: hsla(215, 94%, 26%, 1); */ /*#041e42;*/
+	font-size: 1em;
+	width: 0px;
+	border: solid 1px hsl(0, 0%, 20%);
+	max-height: 80%;
+}
+.FloorListButtons {
+	margin: 4px 10px;
+	padding: 4px 18px 2px 18px;
+	position: relative;
+	display: block;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: inherit;
+	border-style: none;
+	/*background-color: rgb(26, 117, 207);*/
+	background-color: transparent;
+	color: white;
+}
+.FloorListButtons:hover {
+	background-color: hsla(0, 0%, 100%, 0.2);
+}
+.FloorListButtonsOn {
+	background-color: rgb(253, 187, 48);
+}
+
+
+/* ----------------------------- */
+
+
+
+#MainMenu {
+	position: absolute;
+	display: none;
+	top: 0px;
+	left: 0px;
+	bottom: 0px;
+	margin: 0px;
+	overflow: hidden;
+	background-color: rgba(0,0,0,0.6); /* background-color: hsla(215, 94%, 26%, 1); */ /*#041e42;*/
+	width: 230px;
+	cursor: default;
+	border: solid 1px hsl(0, 0%, 20%);
+}
+.MainMenuButton {
+	width:100%;
+	background-color: transparent;
+	padding-left: 20px;
+	transition: background-color 0.2s;
+}
+.MainMenuButton:hover {
+	background-color: hsla(0, 0%, 100%, 0.2);
+}
+.MainMenuButtonActive {
+	background-color: hsla(0, 20%, 100%, 0.2);
+}
+.MainMenuIcon {
+	width: var(--menu-icon-size);
+	height: var(--menu-icon-size);
+	float: left;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+.MainMenuLabel {
+	height: var(--menu-icon-size);
+	line-height: 35px;
+	padding-left: 20px;
+	color: white;
+	font-size: 1em;
+	white-space: nowrap;
+	float: left;
+}
+
+
+/* ----------------------------- */
+
+
+
+#FloorListIcon {
+	background-image:url('../img/icons_v2/floor.svg');
+}
+#CameraListIcon {
+	background-image:url('../img/icons_v2/camera.svg');
+}
+#MapIcon {
+	background-image:url('../img/icons_v2/map.svg');
+}
+#AutoRotateIcon {
+	background-image:url('../img/icons_v2/rotate.svg');
+}
+#ZoomIcon {
+	background-image:url('../img/icons_v2/zoom.svg');
+}
+#ZoomText {
+	padding: 0px;
+}
+#MailLinkIcon {
+	background-image:url('../img/icons_v2/email.svg');
+}
+#HideShowImageIcon {
+	background-image:url('../img/icons_v2/image.svg');
+}
+#HideShowPOVIcon {
+	background-image:url('../img/icons_v2/position.svg');
+}
+#MeasureIcon {
+	background-image:url('../img/icons_v2/measure.svg');
+}
+#AddNotationIcon {
+	background-image:url('../img/icons_v2/addnotation.svg');
+}
+#ReportBugIcon {
+	background-image:url('../img/icons_v2/bug.svg');
+}
+
+/* ----------------------------- */
+
+
+
+#TopMessage {
+	position: absolute;
+	margin: auto;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	width: 80%;
+	margin-bottom: 10px;
+	font-size: 0.7em;
+	color: white;
+	text-align: center;
+}
+
+#TitleBarText {
+	position:relative;
+	top:0px;
+	left:0px;
+	vertical-align: bottom;
+	margin:15px;
+	font-weight: bold;
+	font-size: 20px;
+	color: white;
+	white-space: nowrap;
+	text-shadow:
+		-1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000;
+}
+
+#NameBar {
+	display: none;
+	position: fixed;
+	background-color: rgb(240, 248, 254);
+	color: rgb(0, 56, 150);
+	padding-top: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	/*box-shadow: 0px 2px 5px rgba( 0,0,0,0.45);
+	border-radius: 8px;*/
+}
+
+#MeasureText {
+	display: none;
+	position: fixed;
+	background-color: #ffff00;
+	color: rgb(0, 56, 150);
+	padding-top: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-weight: bold;
+	text-align: center;
+	box-shadow: 0px 2px 5px rgba( 0,0,0,0.45);
+	white-space: nowrap;
+}
+
+#MeasureMenu {
+	position: absolute;
+	display: none;
+	left: 240px;
+	top: 20px;
+	background-color: rgba(0,0,0,0.6); /* background-color: hsla(215, 94%, 26%, 1); */ /*#041e42;*/
+	width: 160px;
+	cursor: default;
+}
+
+.MeasureOn {
+	background-color: hsla(0,80%,60%,0.6);
+}
+.MeasureOn:hover {
+	background-color: hsla(0,80%,60%,0.6);
+	cursor: default;
+}
+
+/* ----------------------------- */
+
+#Button_OpenReportContact {
+	height: 86px;
+}
+#Button_OpenReportContact .MainMenuLabel {
+	padding-top: 6px;
+	height: 86px;
+	line-height: 26px;
+	text-align: left;
+}
+#Button_OpenReportContact .MainMenuIcon {
+	margin-top: 22px;
+}
+
+#ContactReport {
+	display: none;
+	background-color: rgba(0,0,0,0.6);
+}
+#ContactReport_window {
+	background-color: red;
+	width: 275px;
+	height: 140px;
+	margin: auto;
+	box-shadow: 0px 2px 5px rgba( 0,0,0,0.45);
+	color: #e2f3f7;
+	background-color: hsla(215, 94%, 26%, 1);
+}
+#ContactReportForm {
+	margin: 20px 40px;
+	text-align: left;
+}
+#ContactReportForm input {
+	left: 0px;
+}
+.ContactReportButton {
+	position: relative;
+	background-color: hsl(215, 94%, 26%); /*#041e42;*/
+	float:right;
+	padding-left: 8px;
+	padding-right: 8px;
+	margin: 2px;
+	border: solid 1px hsl(0,0%,80%);
+	color: #e2f3f7;
+	height: 25px;
+	line-height: 25px;
+}
+#ContactReportButton_OK {
+}
+#ContactReportButton_CANCEL {
+	margin-right: 10px;
+}
+#ContactReportButton_CLOSE {
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	margin:10px;
+	background-color: transparent;
+	color: #e2f3f7;
+	cursor: pointer;
+}

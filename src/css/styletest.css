@@ -1,0 +1,365 @@
+* {
+	position: relative;
+	padding: 0px;
+	margin: 0px;
+	font-family: Myriad Pro;
+	text-decoration: none;
+}
+
+body, html {
+	background-color: #000000;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+canvas {
+	display: block;
+}
+
+
+button {
+	text-decoration: none;
+	box-shadow: 0px 2px 5px rgba( 0,0,0,0.4);
+	border: 0px;
+	outline: none;
+	opacity: 0.8;
+}
+button:hover {
+	cursor:pointer;
+	opacity: 1;
+}
+
+/* -------------- Top Buttons --------------- */
+
+.imageButton{
+	height: calc(72px*0.6);
+	width: calc(86px*0.6);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-color: transparent;
+}
+
+.HomeButton {
+	background-image:url('../img/buttons/home.png');
+}
+.HomeButton:hover {
+	background-image:url('../img/buttons/home_hover.png');
+}
+/* --- */
+.AutoRotateButton_On {
+	background-image:url('../img/buttons/autorotate.png');
+}
+.AutoRotateButton_On:hover {
+	background-image:url('../img/buttons/autorotate_hover.png');
+}
+.AutoRotateButton_Off {
+	background-image:url('../img/buttons/autorotate_off.png');
+}
+.AutoRotateButton_Off:hover {
+	background-image:url('../img/buttons/autorotate_off_hover.png');
+}
+/* --- */
+.ZoomButton {
+	background-image:url('../img/buttons/zoom.png');
+}
+.ZoomButton:hover {
+	background-image:url('../img/buttons/zoom_hover.png');
+}
+#ZoomText {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	margin: 3px;
+}
+/* --- */
+.MapButton {
+	background-image:url('../img/buttons/map.png');
+}
+.MapButton:hover {
+	background-image:url('../img/buttons/map_hover.png');
+}
+/* --- */
+
+.HideShowImageButton_On {
+	background-image:url('../img/buttons/img.png');
+}
+.HideShowImageButton_On:hover {
+	background-image:url('../img/buttons/img_hover.png');
+}
+.HideShowImageButton_Off {
+	background-image:url('../img/buttons/img_off.png');
+}
+.HideShowImageButton_Off:hover {
+	background-image:url('../img/buttons/img_off_hover.png');
+}
+/* --- */
+.HideShowPOVButton_On {
+	background-image:url('../img/buttons/pov.png');
+}
+.HideShowPOVButton_On:hover {
+	background-image:url('../img/buttons/pov_hover.png');
+}
+.HideShowPOVButton_Off {
+	background-image:url('../img/buttons/pov_off.png');
+}
+.HideShowPOVButton_Off:hover {
+	background-image:url('../img/buttons/pov_off_hover.png');
+}
+/* --- */
+
+.CameraListButton {
+	background-image:url('../img/buttons/cameraList.png');
+}
+.CameraListButton:hover, .CameraListButtonOn {
+	background-image:url('../img/buttons/cameraList_hover.png');
+}
+/* --- */
+.StereoIcon {
+	background-image:url('../img/buttons/stereo.png');
+}
+.StereoIcon:hover, .StereoIconOn {
+	background-image:url('../img/buttons/stereo_hover.png');
+}
+/* --- */
+.AccelIcon {
+	background-image:url('../img/buttons/accel.png');
+}
+.AccelIcon:hover, .AccelIconOn {
+	background-image:url('../img/buttons/accel_hover.png');
+}
+
+/* ----------------------------- */
+
+
+
+.center {
+	position: fixed;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+	margin: auto;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#TopMessage {
+	display: none;
+	margin-bottom: 0px;
+	bottom: auto;
+	padding-top: 5px;
+	font-size: 0.7em;
+	color: white;
+	background-color: rgba(20, 124, 255, 0.2);
+}
+
+#CenterDiv {
+	display: none;
+}
+
+#CenterPointCirlce {
+	display: none;
+}
+#DoublePointCirlceLeft {
+	display: none;
+	right: 50%;
+}
+#DoublePointCirlceRight {
+	display: none;
+	left: 50%;
+}
+
+#CenterPoint{
+	
+}
+#DoublePointLeft{
+	display: none;
+	right: 50%;
+}
+#DoublePointRight{
+	display: none;
+	left: 50%;
+}
+.centerpoint {
+	width: 9px;
+	height: 9px;
+	background-color: rgba(0,0,0,0.2);
+	border-radius: 6px;
+}
+
+#cross {
+	display: none;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+}
+
+
+#NameBar {
+	display: none;
+	position: fixed;
+	background-color: rgb(240, 248, 254);
+	color: rgb(0, 56, 150);
+	padding-top: 5px;
+	padding-left: 15px;
+	padding-right: 15px;
+	font-family: Myriad Pro;
+	font-size: 18px;
+	font-weight: bold;
+	text-align: center;
+	box-shadow: 0px 2px 5px rgba( 0,0,0,0.45);
+	border-radius: 8px;
+}
+
+#Loading {
+	position:absolute;
+	left:0px;
+	top:0px;
+	background-color:rgb(0,0,0);
+}
+#LoadingBG {
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:100%;
+	height:100%;
+	
+}
+#LoadingWord {
+	padding-top: 130px;
+	height:1px;
+	color:white;
+	font-size:4em;
+	font-weight:bold;
+}
+
+
+
+#ObjectInfo {
+	/*display: none;*/
+	background-color: rgba(0, 56, 150, 0.9);
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	margin: 5px;
+	box-shadow: 0px 2px 5px rgba(0,0,0,0.8);
+	border-radius: 8px;
+	cursor: default;
+}
+#ObjectInfo2 {
+	max-height: 250px;
+	overflow-y: auto;
+}
+#ObjectInfoText {
+	color: rgb(150, 200, 245);
+	padding: 1em;
+	margin: 5px;
+	font-family: Monospace;
+	font-size: 1.3em;
+	font-weight: bold;
+	text-align: left;
+	cursor: default;
+}
+
+#ObjectInfo_CloseButton {
+	display: none;
+	position: absolute;
+	top: 0px;
+	right: 18px;
+}
+
+
+#ButtonBar {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+	margin: 0px 5px;
+	/*height: 70%;*/
+	text-align: right;
+	display: inline;
+}
+
+#ButtonBar button {
+}
+#CameraListButton {
+}
+#HideShowPOVButton {
+}
+#HideShowImageButton {
+}
+#ZoomText {
+}
+
+#CameraList {
+	position: absolute;
+	display: none;
+	top: 0px;
+	right: 8px;
+	margin: 0px;
+	overflow-y: auto;
+	background-color: rgba(216, 236, 253, 0.8);
+	padding: 2px 18px 2px 18px;
+	font-size: 1em;
+	border-radius: 6px;
+	border-style: solid;
+	border-color: white;
+	border-width: 1px 3px 3px 1px;
+}
+
+#SettingButtons {
+	position: absolute;
+	bottom: 20px;
+	right: 20px;
+}
+
+
+#CameraList2 {
+	position: relative;
+}
+
+.camListButtons {
+	margin: 4px 10px;
+	padding: 4px 8px 2px 8px;
+	position: relative;
+	display: block;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	font-size: inherit;
+	border-style: none;
+	background-color: rgb(26, 117, 207);
+	color: white;
+}
+
+.camListButtonsOn {
+	background-color: rgb(253, 187, 48);
+}
+
+
+
+
+#TitleBar {
+	position:absolute;
+	bottom:12px;
+	left:0px;
+	width:100%;
+	height:60px;
+	/*box-shadow: -1px 5px 5px rgba( 0,0,0,0.6);*/
+}
+
+#TitleBarText, #TitleBarLogo {
+	position:absolute;
+	bottom:19px;
+	left:0px;
+	font-weight: bold;
+	font-size: 40px;
+	padding: 0px 30px;
+	color: white;
+	white-space: nowrap;
+}
+
+#TitleBarText {
+	padding: 0px 150px;
+}

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	</script>
+
+	<title>Vizkey Projects</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<META HTTP-EQUIV="Expires" CONTENT="Tue, 01 Jan 1981 1:00:00 GMT">
+	<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<META HTTP-EQUIV="Pragma" CONTENT="no-store">
+	<meta http-equiv="Cache-Control" content="no-store" />
+
+	<link rel="stylesheet" id="bogel-font" href="https://vizkeydesigns.com/dfw/63fd9f59-6ace/57132652-ed71-42ee-9bc8-c256b0073184/v1/BogleWeb.css">
+
+	<LINK href="../../TeamWebsite/src/css/mobileStyle.css?v=1.0" rel="stylesheet" type="text/css">
+
+	<script src="../../TeamWebsite/src/js/jquery-2.1.0.min.js"></script>
+	<script>
+		pl = {};
+	</script>
+	<!--<script src="./3d/assets/uploads/Dome_Projects/DomeProjectsDataList.js"></script>-->
+	<link rel="shortcut icon" href="favicon.ico">
+</head>
+	<body>
+
+	<div id="Title">
+		<h1>Vizkey</br>360 Projects</h1>
+	</div>
+	
+	<div id="ProjectListDiv">
+		<ul id="ProjectList">
+		</ul>
+	</div>
+	
+	<script>
+		
+	document.getElementById("ProjectList").innerHTML = "";
+	var groups = [];
+	var groupDivs = [];
+	var d;
+	for (var i=0; i<pl.Links.length; i++) {
+	
+		var group = pl.Links[i].group;
+		var project = pl.Links[i].project;
+		var grpind = groups.indexOf(group);
+		if (grpind<=-1)
+		{
+			d = document.createElement("ul");
+			groups.push(group);
+			groupDivs.push(d);
+			document.getElementById("ProjectList").appendChild(d);
+			var titl = document.createElement("p");
+			titl.className = "GroupTitle";
+			titl.innerText = group;
+			d.appendChild(titl);
+		}
+		grpind = groups.indexOf(group);
+		
+		var g = group + "?" + project;
+		while (g.indexOf(" ") > -1) {
+			g = g.replace(" ", "%20");
+		}
+		
+		var li = document.createElement("li");
+		li.className = "projectLinks";
+		li.id = "projectLink_"+ group + "_" + project;
+		var a = document.createElement("a");
+		a.href = "Dome.html?" + g;
+		a.innerText = project;
+		li.appendChild(a);
+		groupDivs[grpind].append(li);
+		
+	}
+	
+	</script>
+	</body>
+</html>

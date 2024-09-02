@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Document title and character encoding -->
+    <title>VizKey Designs</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store">
+    <meta http-equiv="Pragma" content="no-cache">
+    
+    <!-- Stylesheets -->
+    <link href="https://fonts.googleapis.com/css?family=Muli:200" rel="stylesheet">
+    <link href="src/css/BogleWeb.css" rel="stylesheet">
+    <link href="src/css/indexStyle.css?v2" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="favicon.ico">
+    
+    <!-- JavaScript libraries and scripts -->
+    <script src="src/js/jquery-2.1.0.min.js"></script>
+    <script type="module">
+        import { IndexScript } from './src/js/indexScript.js';
+        window.onload = function() {
+            let ins = new IndexScript(); // Ensure 'new' keyword is used
+            ins.START(); // Call the START method
+        };
+    </script>
+</head>
+<body>
+    <!-- Background section -->
+    <div id="BG"></div>
+    
+    <!-- Header section -->
+    <div id="Header">
+        <img id="TitleBar" src="./src/img/TitleBar.png" alt="Title Bar">
+        <h1 id="TitleBarText">Projects</h1>
+        <h1 class="header-position">VizKey 360 Viewer</h1>
+    </div>
+    
+    <!-- Projects section -->
+    <div id="PROJECTS">
+        <div id="ProjectTable">
+            <div id="ProjectGroupDiv">
+                <h1 class="ProjectTableHeader">Projects</h1>
+                <ul id="ProjectGroupList"></ul>
+            </div>
+            
+            <div id="ProjectListDiv">
+                <h1 class="ProjectTableHeader">360 Viewer</h1>
+                <ul id="ProjectList"></ul>
+                <div id="Choose" class="choose-category">Please choose a category from the list on the left.</div>
+            </div>
+            
+            <div id="ProjectImageListDiv">
+                <h1 class="ProjectTableHeader">Still Images</h1>
+                <ul id="ProjectImageList"></ul>
+            </div>
+        </div>
+        
+        <!-- Image bar for browsing project images -->
+        <div id="ImageBar">
+            <div id="ImageBarDiv"></div>
+            <button id="ImageBar_LeftButton" aria-label="Previous Image">&lt;</button>
+            <button id="ImageBar_RightButton" aria-label="Next Image">&gt;</button>
+        </div>
+    </div>
+    
+</body>
+</html>

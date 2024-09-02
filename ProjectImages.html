@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+	</script>
+
+	<title>Vizkey Image Projects</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<META HTTP-EQUIV="Expires" CONTENT="Tue, 01 Jan 1980 1:00:00 GMT">
+	<META HTTP-EQUIV="Pragma" CONTENT="no-cache">
+	<meta http-equiv="Cache-Control" content="no-cache" />
+	<META HTTP-EQUIV="Pragma" CONTENT="no-store">
+	<meta http-equiv="Cache-Control" content="no-store" />
+
+	<link rel="shortcut icon" href="favicon.ico">
+
+	<script src="./src/js/jquery-2.1.0.min.js"></script>
+
+	<script>
+		pl = {};
+
+		var scripts = [
+			"./src/uploads/Image_Projects/ProjectImagesList.js",
+			"./src/js/ProjectImages.js"
+		];
+		var randomnos = Math.ceil(Math.random() * 100000000);
+		for (var i = 0; i < scripts.length; i++) {
+			var scriptsrc = scripts[i] + "?" + randomnos;
+			var scr = document.createElement('script');
+			scr.src = scriptsrc;
+			document.head.appendChild(scr);
+		}
+
+	</script>
+
+	<LINK href="./src/css/ProjectImages.css" rel="stylesheet" type="text/css">
+</head>
+	
+	<Body>
+		<div id=BG></div>
+	
+		<h1 id="PageTitle"></h1>
+		<div id="ImageGrp"></div>
+		<div id="ImagePreview"></div>
+		<a id="UpdateImage">Request Update</a>
+		
+		<a id="RequestLink" target="_blank" href="https://vizkeydesigns.com/">
+		3D Request: </a><!--https://vizkeydesigns.com/-->
+	
+		<a href="https://vizkeydesigns.com/" style="background:black;position:absolute;left:50%;right:50%;top:5px;margin:auto;">
+			<button id="HomeButton" class="HomeButton imageButton" type="button"></button>
+		</a>
+			
+		<div id="FullImageName"></div>
+	
+		<div id="HoverName"></div>
+	
+		<div id="FullScreenContainer"> <!-- covers the entire page with a click-able transparent black -->
+			<div id="FullScreenImage"></div> <!-- background image set by code --> 
+		</div>
+		
+	</Body>
+	
+</html>
