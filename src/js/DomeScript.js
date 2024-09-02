@@ -1,10 +1,10 @@
 import * as THREE from './src/js/build/three.module.js?v1.1';
-import { DeviceOrientationControls } from './src/js/controls/DeviceOrientationControls.js?v1.1';
-import { DomeProjectData } from './uploads/360Projects/DomeProjectsDataList.js?v1.1';
-import { Mobile } from './src/js/mobile.js?v1.2';
+import { DeviceOrientationControls } from '../../src/js/controls/DeviceOrientationControls';
+import { DomeProjectData } from '../../uploads/360Projects/DomeProjectsDataList';
+import { Mobile } from '../../src/js/mobile';
 import { userupdate } from './src/js/userupdate.js?v1.1';
 
-import { DynamicFloor } from './src/js/DynamicFloor.js?v1.1';
+import { DynamicFloor } from '../../src/js/DynamicFloor';
 
 class DomeScript {
 
