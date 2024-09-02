@@ -1,4 +1,4 @@
-import * as THREE from '../src/js/build/three.module.js';
+import * as THREE from '../../src/js/build/three.module.js';
 import { DeviceOrientationControls } from '../../src/js/controls/DeviceOrientationControls.js';
 import { DomeProjectData } from '../../uploads/360Projects/DomeProjectsDataList.js';
 import { Mobile } from '../../src/js/mobile.js';
