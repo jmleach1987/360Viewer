@@ -7,8 +7,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
-    <LINK href="src/css/domeStyle.css?v1.2" rel="stylesheet" type="text/css">
-    <script src="src/js/jquery-2.1.0.min.js"></script>
+    <LINK href="./src/css/domeStyle.css" rel="stylesheet" type="text/css">
+    <script src="./src/js/jquery-2.1.0.min.js"></script>
 
 </head>
 
@@ -70,7 +70,7 @@
 
         // let mixer; // for fbx animation
 
-        const uploadsDir = 'https://space.wal-mart.com/3d/assets/uploads/';
+        const uploadsDir = './uploads/fbx';
 
         let models;
         window.onload = function () {
@@ -199,8 +199,6 @@
             // model
             const loader = new FBXLoader();
 
-            //loader.load(uploadsDir + 'Apparel/4way54wgride/4way54wgride_1.fbx', function (object) {
-            // https://space.wal-mart.com/3d/assets/uploads/fbx/Apparel/2X2suntwr/2X2Suntwr_D.png
             loader.load(uploadsDir + 'fbx/' + model + '.fbx', function (object) {
 
                 //mixer = new THREE.AnimationMixer( object );
@@ -259,9 +257,6 @@
 
             // model
 
-            // https://space.wal-mart.com/3d/assets/uploads/gltf/Apparel/2X2suntwr/2X2suntwr_1.gltf
-
-            
             //new GLTFLoader(manager)
             //    .setPath(uploadsDir + 'gltf/')
             //    .load(model + '.gltf', function (gltf) {
