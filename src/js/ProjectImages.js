@@ -7,16 +7,6 @@ while (project.indexOf("%20") > -1) {
 	project = project.replace("%20", " ");
 }
 
-
-//var script;
-//if (a.indexOf("?") > 0) {
-//	script = document.createElement('script');
-//	script.type= 'text/javascript';
-//	script.src='src/ImageProjects/'+wd.project+'/CamPos.js';
-//	var head = document.getElementsByTagName('head')[0];
-//	head.appendChild(script);
-//}
-
 window.onload = function() {
 	document.getElementById("ImagePreview").addEventListener('click', FullScreenImage_Open);
 	document.getElementById("FullScreenContainer").addEventListener('click', FullScreenImage_Close);

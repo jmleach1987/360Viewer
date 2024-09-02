@@ -1137,23 +1137,12 @@ function ShowNameBar(txt){
 }
 
 function update() {
-
-	//if ( isUserInteracting === false ) {
-
-	//	lon += 0.03;
-
-	//}
-	//getLocation(); // -------- FUTURE ADDITIONS
-	
 	NameBarPosition();
-	
-	//LookSelection();
 	if (isAccel) { 
 		controls.update(); 
 		LookSelection();
 	} 
 	else {
-		//document.getElementById("NameBar").innerText = lon;
 		lat = Math.max( - 85, Math.min( 85, lat ) );
 		phi = THREE.Math.degToRad( 90 - lat );
 		theta = THREE.Math.degToRad( lon );
@@ -1166,12 +1155,7 @@ function update() {
 
 		camera.lookAt( camera.target );
 		
-	}
-	/*
-	// distortion
-	camera.position.copy( camera.target ).negate();
-	*/
-		
+	}	
 	if (isStereo){ 
 		effect.render( scene, camera ); 
 	}

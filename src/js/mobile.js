@@ -61,10 +61,6 @@ class Mobile {
             controls.connect();
         }
 
-        //let g = document.getElementById("StereoIcon");
-        //if (g.className == "StereoIconOn imageButton") { g.className="StereoIcon imageButton"; document.getElementById("AccelIcon").className="AccelIcon imageButton"; }
-        //else { g.className="StereoIconOn imageButton"; document.getElementById("AccelIcon").className="AccelIconOn imageButton"; }
-
         if (this.isAccel) {
             $("#CenterDiv").show();
         } else { $("#CenterDiv").hide(); }
@@ -148,74 +144,6 @@ class Mobile {
             $("#CenterPointCirlce, #DoublePointCirlceLeft, #DoublePointCirlceRight").hide();
             ClearCircles();
         }
-
-        /*
-        return;
-
-        let vector = new THREE.Vector3( camera.rotation.x, camera.rotation.y, camera.rotation.z );
-        if (vector.x < 0) vector.x = vector.x + (Math.PI * 2);
-        if (vector.y < 0) vector.y = vector.y + (Math.PI * 2);
-        if (vector.z < 0) vector.z = vector.z + (Math.PI * 2);
-
-        let max = 9999;
-        let ind = -1;
-
-        for (let i=0; i < POV_VectorAngles.length; i++){
-            let cx = Math.abs(vector.x - POV_VectorAngles[i].vector.x);
-            let cy = Math.abs(vector.y - POV_VectorAngles[i].vector.y);
-            let cz = Math.abs(vector.z - POV_VectorAngles[i].vector.z);
-
-            //if (POV_VectorAngles[i].name == "Camera 5") {
-            //	console.log("Diff: " + cx, cy, cz + 
-            //	"\nPOV: " + POV_VectorAngles[i].vector.x, POV_VectorAngles[i].vector.y, POV_VectorAngles[i].vector.z +
-            //	"\nCam: " + vector.x, vector.y, vector.z);
-            //}
-
-            let feather = 0.04;
-            let flip = (Math.PI*2)-feather;
-            if ((cx < feather || cx > flip) && (cy < feather || cy > flip) && (cz < feather || cz > flip))
-            {
-                if (cx+cy+cz < max){
-                    max = cx+cy+cz;
-                    ind = i;
-                }
-            }
-
-        }
-
-        if (ind != -1) {
-            ShowNameBar(POV_VectorAngles[ind].name);
-            // Now place the name box over the center div to the top right
-            // start the selection timer
-            if (iv == undefined) {
-                if (this.isStereo){ $("#DoublePointCirlceLeft, #DoublePointCirlceRight").show();  }
-                else { $("#CenterPointCirlce").show(); }
-                iv = setInterval(function() {
-                    if (hoverTime >= Math.PI * 2) {
-                        clearInterval(iv);
-                        iv = undefined;
-                        hoverTime = 0;
-                        $("#CenterPointCirlce, #DoublePointCirlceLeft, #DoublePointCirlceRight").hide();
-                        ClearCircles();
-                        $("#NameBar").hide();
-                        ChangePOV(POV_VectorAngles[ind].name);
-                        RefreshZoom();
-                    }
-                    drawSelectionArc();
-                }, 1000/30);
-            }
-        } else {
-            $("#NameBar").hide();
-            if (iv != undefined) { 
-                clearInterval(iv); 
-                //console.log("end the timer"); 
-            }
-            iv = undefined;
-            hoverTime = 0;
-            $("#CenterPointCirlce, #DoublePointCirlceLeft, #DoublePointCirlceRight").hide();
-            ClearCircles();
-        }
-        */
     }
 
 
