@@ -1906,14 +1906,7 @@ class DomeScript {
                 }
 
 
-            } else { console.log("Invalid Data"); return;
-
-            }
-
-             // Debugging information
-             console.log("Incoming location.href:", location.href);
-            };
-
+            } else { console.log("Invalid Data"); return; }
 
             // the images are svg, no loading necessary
             if (!a.includes("?")) { return; }
@@ -1940,4 +1933,6 @@ class DomeScript {
 
         }
     }
+}
+
 export { DomeScript };
