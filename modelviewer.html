@@ -70,12 +70,12 @@
 
         // let mixer; // for fbx animation
 
-        const uploadsDir = './uploads/fbx';
+        const uploadsDir = './uploads';
 
         let models;
         window.onload = function () {
 
-            readTextFile(uploadsDir + "models.json", function (text) {
+            readTextFile(uploadsDir + "fbx" + "models.json", function (text) {
                 models = JSON.parse(text);
                 init();
 
@@ -199,7 +199,7 @@
             // model
             const loader = new FBXLoader();
 
-            loader.load(uploadsDir + 'fbx/' + model + '.fbx', function (object) {
+            loader.load(uploadsDir + 'fbx' + model + '.fbx', function (object) {
 
                 //mixer = new THREE.AnimationMixer( object );
 
