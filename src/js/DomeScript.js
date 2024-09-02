@@ -1287,7 +1287,7 @@ class DomeScript {
             body += CameraURL;
             body += ">";
 
-            let uri = "mailto:3ddesign@wal-mart.com?subject=";
+            let uri = "mailto:jmleach1987@hotmail.com?subject=";
             uri += encodeURIComponent(subject);
             uri += "&body=";
             uri += encodeURIComponent(body);

@@ -53,17 +53,6 @@ var a = location.href;
 var b = a.substring(a.indexOf("?")+1);
 wd.project = b.replace("%20", " ");
 
-//var script;
-//if (a.indexOf("?") > 0) {
-//	script = document.createElement('script');
-//	script.type= 'text/javascript';
-//	script.src='https://space.wal-mart.com/3d/assets/uploads/Dome_Projects/'+wd.project+'/CamPos.js';
-//	var head = document.getElementsByTagName('head')[0];
-//	head.appendChild(script);
-//}
-
-
-
 function DrawCross() { // for testing purposes
 	$("#cross").show();
 	// Used to visually find the perfect center of the screen
@@ -447,32 +436,13 @@ function preloadImages(){
 	_3DLogo.src = "src/img/3DLogo.png";
 	TitleBar = new Image();
 	TitleBar.src = "src/img/TitleBar.png";
-	//var t = false;
-	//for (var i=0; i < wd.CamPos.length; i++){
-	//	var img = new Image();
-	//	var src = 'https://space.wal-mart.com/3d/assets/uploads/Dome_Projects/'+wd.project+'/' + lowRes + wd.CamPos[i].name+'.jpg';
-	//	$(img)
-	//		.on('load', ImageIsLoaded )
-	//		.on('error', function() { 
-	//			console.log("error loading image");
-	//				if (imageLoadSuccess){
-	//					imageLoadSuccess = false;
-	//					lowRes = "";
-	//					images = [];
-	//					preloadImages();
-	//				}
-	//			})
-	//		.attr("src", src)
-	//	;
-	//	images.push(img);
-	//}
 }
 
 
 function PreloadTextures() {
 	preloadImages();
 	for (var i=0; i < wd.CamPos.length; i++){
-		var src = 'https://space.wal-mart.com/3d/assets/uploads/Dome_Projects/' + wd.project + '/' + lowRes + wd.CamPos[i].name + '.jpg';
+		var src = '../../uploads/360Projects/' + wd.project + '/' + lowRes + wd.CamPos[i].name + '.jpg';
 		var texloader = new THREE.TextureLoader();
 		var nm = wd.CamPos[i].name;
 		DomeTextures[nm] = texloader.load(src, function(tex, nm) {
@@ -710,16 +680,6 @@ function PositionRig() {
 	var domeImage = wd.CamPos[chosenPOV].name;
 	ImageDome.material.map = DomeTextures[domeImage];
 	ImageDome.material.needsUpdate = true;
-	
-	//if (ImageDome.material.envMap != undefined) {
-	//	ImageDome.material.envMap = ImageDome.material.map;
-	//}
-	//THREE.ImageUtils.loadTexture( 'https://space.wal-mart.com/3d/assets/uploads/Dome_Projects/'+wd.project+'/' + lowRes + wd.CamPos[chosenPOV].name +'.jpg' );
-	//
-	
-	//plight.position.set( pos.x, pos.y-100, pos.z );
-	//dirLight.position.set(pos.x, pos.y+200, pos.z);
-	//dirLight.target.position.set(pos.x, pos.y, pos.z);
 }
 
 function MapView() {

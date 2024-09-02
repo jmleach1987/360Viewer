@@ -45,11 +45,8 @@ class DomeScript {
         const clock = new THREE.Clock();
 
         // points to the website so the images can be literally sourced
-        let uploadsDir = 'https://space.wal-mart.com/3d/assets/uploads/Dome_Projects/';
-        //"https://space.wal-mart.com/3d/assets/uploads/"
-        // ../../
-
-
+        let uploadsDir = '../../uploads/360Projects/';
+     
         // this is the old way that was index based
         // let chosenPOV = 0; // index of the current camera
         // the selected camera to jump to
@@ -1292,7 +1289,7 @@ class DomeScript {
             body += CameraURL;
             body += ">";
 
-            let uri = "mailto:3ddesign@wal-mart.com?subject=";
+            let uri = "mailto:jmleach1987@hotmail.com?subject=";
             uri += encodeURIComponent(subject);
             uri += "&body=";
             uri += encodeURIComponent(body);

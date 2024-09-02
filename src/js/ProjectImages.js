@@ -40,7 +40,7 @@ function UpdateImageEmail(imgname) {
 	$("#UpdateImage").on("click", function(e)
 	{
 		imgname = imgname.replace(" ","%20");
-		$(this).attr('href', 'mailto:kendall.wilcox@walmart.com?subject=Still image update request&body=Could you please update%0D%0A'+imgname);
+		$(this).attr('href', 'mailto:jmleach1987@hotmail.com?subject=Still image update request&body=Could you please update%0D%0A'+imgname);
     });
 }
 
@@ -56,7 +56,7 @@ function CreateImages() {
 	for (var i=0; i<pl.ProjectImages.length; i++) {
 		if (pl.ProjectImages[i].group != group || pl.ProjectImages[i].project != project) continue;
 		var img = new Image();
-		img.src = "https://space.wal-mart.com/3d/assets/uploads/" + pl.ProjectImages[i].imgName;
+		img.src = "../../uploads/image_projects/" + pl.ProjectImages[i].imgName;
 		img.className = "ProjectImages_Img";
 		ImageGrp.appendChild(img);
 		img.addEventListener('mouseover', ImageOver);
