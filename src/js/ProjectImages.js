@@ -46,7 +46,7 @@ function CreateImages() {
 	for (var i=0; i<pl.ProjectImages.length; i++)
 		if (pl.ProjectImages[i].group != group || pl.ProjectImages[i].project != project) continue;
 		var img = new Image();
-		img.src = "../../uploads/image_projects/" + pl.ProjectImages[i].imgName;
+		img.src = "../../uploads/imageprojects/" + pl.ProjectImages[i].imgName;
 		img.className = "ProjectImages_Img";
 		ImageGrp.appendChild(img);
 		img.addEventListener('mouseover', ImageOver);
