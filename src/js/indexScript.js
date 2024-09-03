@@ -429,4 +429,4 @@ class indexScript {
 	}
 }
 	
-export { indexScript };
+export {indexScript};
