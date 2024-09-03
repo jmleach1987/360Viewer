@@ -102,8 +102,6 @@ class indexScript {
 			});
 		}
 
-
-		
 		let imgbar_imgtoload = [];
 		function LoadimgBarLoop() {
 			if (imgbar_imgtoload.length == 0) return;
@@ -179,7 +177,6 @@ class indexScript {
 		}
 
 		function ResizeProjectList() {
-			//aligncloseonassocpic();
 		}
 
 
