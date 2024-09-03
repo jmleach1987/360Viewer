@@ -1,4 +1,4 @@
-import { DomeProjectData } from '../../assets/uploads/Dome_Projects/DomeProjectsDataList.js?v1';
+import { DomeProjectData } from '../../uploads/360Projects/DomeProjectsDataList.js';
 import { imageBarList } from './imageBarList.js';
 			
 // randomize the imagebar
