@@ -594,7 +594,7 @@ class DomeScript {
                 return;
             }
             obj.DomeImage = "loading";
-            const src = uploadsDir + '/' + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime;
+            const src = uploadsDir + DMGroup + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime;
 
             obj.DomeImage = new THREE.TextureLoader().load(src, function (tex) {
                 tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
@@ -799,7 +799,7 @@ class DomeScript {
 
                         let ff = String(CurrentDome.material.map.image.src);
                         if (ff.includes("/lowRes/")) {
-                            let src = uploadsDir + '/' + DMGroup + '/' + DMProject + '/' + chosenCamObj.name + '.jpg?v=' + SceneData.CacheTime; // + d.getTime();
+                            let src = uploadsDir + DMGroup + DMProject + chosenCamObj.name + '.jpg?v=' + SceneData.CacheTime; // + d.getTime();
                             console.log("loading Highres: " + src);
                             chosenCamObj.DomeImage = new THREE.TextureLoader().load(src, function (tex) {
                                 tex.minFilter = THREE.LinearFilter;
