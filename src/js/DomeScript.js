@@ -595,7 +595,7 @@ class DomeScript {
                 return;
             }
             obj.DomeImage = "loading";
-            const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime;
+            const src = uploadsDir + '/' + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime;
 
             obj.DomeImage = new THREE.TextureLoader().load(src, function (tex) {
                 tex.anisotropy = renderer.capabilities.getMaxAnisotropy();
