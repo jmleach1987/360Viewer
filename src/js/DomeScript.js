@@ -38,7 +38,7 @@ class DomeScript {
         const clock = new THREE.Clock();
 
         // points to the website so the images can be literally sourced
-        let uploadsDir = '../../uploads/360Projects';
+        let uploadsDir = '../../uploads/360Projects/';
         let chosenCamObj;
         let controls, effect;
 
