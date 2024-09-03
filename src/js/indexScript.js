@@ -1,11 +1,6 @@
 import { DomeProjectData } from '../../uploads/360Projects/DomeProjectsDataList.js';
 import { imageBarList } from './imageBarList.js';
 			
-// randomize the imagebar
-// update bios
-// contact page
-
-// copysuccess = document.execCommand("copy") // copy to clipboard
 
 class indexScript {
 	constructor(object) {
