@@ -2,7 +2,6 @@ import * as THREE from '../../src/js/build/three.module.js';
 import { DeviceOrientationControls } from '../../src/js/controls/DeviceOrientationControls.js';
 import { DomeProjectData } from '../../uploads/360Projects/DomeProjectsDataList.js';
 import { Mobile } from '../../src/js/mobile.js';
-import { DynamicFloor } from '../../src/js/DynamicFloor.js';
 
 class DomeScript {
 
@@ -38,7 +37,7 @@ class DomeScript {
         const clock = new THREE.Clock();
 
         // points to the website so the images can be literally sourced
-        let uploadsDir = '../../uploads/360Projects';
+        let uploadsDir = '../360Viewer/uploads/360Projects';
         let chosenCamObj;
         let controls, effect;
 
