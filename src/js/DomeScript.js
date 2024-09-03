@@ -800,7 +800,7 @@ class DomeScript {
 
                         let ff = String(CurrentDome.material.map.image.src);
                         if (ff.includes("/lowRes/")) {
-                            let src = uploadsDir + DMGroup + '/' + DMProject + '/' + chosenCamObj.name + '.jpg?v=' + SceneData.CacheTime; // + d.getTime();
+                            let src = uploadsDir + '/' + DMGroup + '/' + DMProject + '/' + chosenCamObj.name + '.jpg?v=' + SceneData.CacheTime; // + d.getTime();
                             console.log("loading Highres: " + src);
                             chosenCamObj.DomeImage = new THREE.TextureLoader().load(src, function (tex) {
                                 tex.minFilter = THREE.LinearFilter;
@@ -1070,7 +1070,7 @@ class DomeScript {
             // Request a Feature
             // Report a bug
             $("#ContactReport").fadeOut("fast");
-            let subject = "3D Dome Viewer - " + contacttype + ": " + DMGroup + " - " + DMProject;
+            let subject = "360 Viewer - " + contacttype + ": " + DMGroup + " - " + DMProject;
             if (contacttype == "Incorrect Visual Element") {
                 contacttype = "point out an " + contacttype;
             }
