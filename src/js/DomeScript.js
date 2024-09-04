@@ -1107,11 +1107,11 @@ class DomeScript {
             if (contacttype == "Incorrect Visual Element") {
                 contacttype = "point out an " + contacttype;
             }
-            let body = "Hey 3D team,\r\n\r\nI'd like to " + contacttype + ": \r\n\r\n\r\n\r\n<";
+            let body = "Hello,\r\n\r\nI'd like to " + contacttype + ": \r\n\r\n\r\n\r\n<";
             body += CameraURL;
             body += ">";
 
-            let uri = "mailto:3ddesign@wal-mart.com?subject=";
+            let uri = "mailto:jmleach1987@hotmail.com?subject=";
             uri += encodeURIComponent(subject);
             uri += "&body=";
             uri += encodeURIComponent(body);
