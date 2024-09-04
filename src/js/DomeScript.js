@@ -674,6 +674,7 @@ class DomeScript {
             // console.log("preload:" + obj.name);
             // let d = new Date();
             const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime;
+            //const src = uploadsDir + DMGroup + '/' + DMProject + '/lowRes/' + obj.name + '.jpg?v=' + SceneData.CacheTime;
             //console.log(src);			
 
             // the camangles will be in the same order
